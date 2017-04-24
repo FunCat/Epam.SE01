@@ -21,13 +21,13 @@ public class Notepad {
 
     public static void main(String[] args) {
         Notepad myNotepad = new Notepad("Diary");
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < 5; i++)
             myNotepad.addNewNote("Hello World!");
         myNotepad.deleteNode(3);
         myNotepad.deleteNode(5);
         myNotepad.updateNote(2,"Hi!");
-        myNotepad.deleteNode(12);
-        myNotepad.updateNote(12,"ERROR!");
+        myNotepad.deleteNode(1);
+        myNotepad.updateNote(1,"ERROR!");
 
         myNotepad.watch();
     }

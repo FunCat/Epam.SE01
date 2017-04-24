@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class SingleArray {
 
     public static void main(String[] args) {
-        int[] myArray = generateRandomArray(4);
+        int[] myArray = generateRandomArray(10);
         int max = maxValue(myArray);
         System.out.println(Arrays.toString(myArray));
         System.out.println("Max = " + max);
@@ -36,17 +36,15 @@ public class SingleArray {
     public static int maxValue(int[] array){
         if(array.length == 1) return array[0];
         if(array.length == 2) return array[0] + array[1];
-        int maxValue = array[0] + array[array.length - 1];
-        int i = 1;
-        int j = array.length - 2;
-        while(j - i != -1){
-            if(i == j) {
+        int maxValue = array[0] + array[1];
+        int i = 2;
+        while(i < array.length){
+            if(i == array.length - 1) {
                 if (maxValue < array[i]) maxValue = array[i];
                 break;
             }
-            if(maxValue < array[i] + array[j]) maxValue = array[i] + array[j];
-            i++;
-            j--;
+            if(maxValue < array[i] + array[i + 1]) maxValue = array[i] + array[i + 1];
+            i += 2;
         }
         return maxValue;
     }
