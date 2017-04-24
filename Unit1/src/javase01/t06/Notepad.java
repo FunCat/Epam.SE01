@@ -1,5 +1,7 @@
 package javase01.t06;
 
+import java.util.Calendar;
+
 public class Notepad {
 
     public Notepad(String nameNotepad) {
@@ -66,6 +68,7 @@ public class Notepad {
         int index = find(updIdNote);
         if(index == -1) {System.out.println("Записи с номером " + updIdNote + " нету!"); return;}
         listNotes[index].setText(newText);
+        listNotes[index].setDateNote(Calendar.getInstance());
     }
 
     /** Поиск индекса в массиве записи по её номеру

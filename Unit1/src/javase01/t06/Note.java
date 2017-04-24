@@ -1,10 +1,15 @@
 package javase01.t06;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Note {
 
     public Note(String text, int index) {
         this.text = text;
         this.id = index;
+        dateNote = Calendar.getInstance();
     }
 
     public int getId() {
@@ -13,6 +18,10 @@ public class Note {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public void setDateNote(Calendar dateNote) {
+        this.dateNote = dateNote;
     }
 
     @Override
@@ -35,9 +44,11 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note " + id + "\n\t\"" + text + '\"';
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return "Note " + id + "   " + dateFormat.format(dateNote.getTime()) + "\n\t\"" + text + '\"';
     }
 
     private String text = "-";
     private int id;
+    private Calendar dateNote;
 }
