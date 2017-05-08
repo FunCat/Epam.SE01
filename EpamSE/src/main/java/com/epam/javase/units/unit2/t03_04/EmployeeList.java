@@ -51,6 +51,7 @@ public class EmployeeList {
         listEmployees.remove(index - 1);
     }
 
+    /** Select th employee by the index */
     public void selectEmployee(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the index: ");
@@ -63,6 +64,16 @@ public class EmployeeList {
 
     }
 
+    /** Watch all employees in the listEmployees */
+    public void watchListEmployees(){
+        System.out.println("================= List employees ====================");
+        int count = 1;
+        for (Employee employee : listEmployees) {
+            System.out.println(count++ + ") " + employee);
+            System.out.println("=================================================");
+        }
+    }
+
     /** Wait for a command in the console */
     public void readCommand(EmployeeList employees){
         while (true){
@@ -71,12 +82,13 @@ public class EmployeeList {
                 System.out.println("[1] Add a new employee");
                 System.out.println("[2] Select the employee");
                 System.out.println("[3] Remove the employee");
-                System.out.println("[4] Exit");
+                System.out.println("[4] Watch the list of employees");
+                System.out.println("[5] Exit");
                 System.out.print("Command number: ");
                 Scanner sc = new Scanner(System.in);
                 int commandNumber = sc.nextInt();
                 System.out.println();
-                if (commandNumber == 4) break;
+                if (commandNumber == 5) break;
                 switch (commandNumber) {
                     case 1:
                         employees.addNewEmployee();
@@ -86,6 +98,9 @@ public class EmployeeList {
                         break;
                     case 3:
                         employees.removeEmployee();
+                        break;
+                    case 4:
+                        employees.watchListEmployees();
                         break;
                     default:
                         System.out.println("You enter the wrong command number! Try again!");

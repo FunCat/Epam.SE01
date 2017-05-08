@@ -38,6 +38,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee\t" + name + "\t" + lastname;
+        return name + " " + lastname;
     }
 }
