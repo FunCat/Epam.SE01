@@ -8,11 +8,6 @@ public class Goods {
     private static NameComparator nameComparator = new NameComparator();
     private static BiComparator priceAndNameComparator = new BiComparator(priceComparator, nameComparator);
 
-    public static void main(String[] args) {
-        Goods myGoods = new Goods();
-        readCommand(myGoods);
-    }
-
     /** Add a new good at the listGoods */
     public void addNewGood(){
         System.out.println("Choose a thing:");
@@ -102,7 +97,7 @@ public class Goods {
     }
 
     /** Wait for a command in the console */
-    public final static void readCommand(Goods goods){
+    public void readCommand(Goods goods){
         while (true){
             System.out.println("Enter the command number:");
             System.out.println("[1] Add a new thing");
