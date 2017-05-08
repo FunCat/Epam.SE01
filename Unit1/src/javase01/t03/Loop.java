@@ -3,7 +3,7 @@ package javase01.t03;
 public class Loop {
 
     public static void main(String[] args) {
-        f(10,20,1);
+        f(10,30,1);
     }
 
     public static void f(int a, int b, int h){
