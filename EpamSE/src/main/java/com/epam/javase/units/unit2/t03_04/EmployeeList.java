@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeList {
-    private List<Employee> listEmployees = new ArrayList<Employee>();
+    private List<Employee> listEmployees = new ArrayList<>();
     private int indexSelectedEmployee = -1;
 
     public static void main(String[] args) {
@@ -51,7 +51,7 @@ public class EmployeeList {
         listEmployees.remove(index - 1);
     }
 
-    /** Select th employee by the index */
+    /** Select the employee by the index */
     public void selectEmployee(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the index: ");
@@ -61,7 +61,6 @@ public class EmployeeList {
             return;
         }
         setIndexSelectedEmployee(index - 1);
-
     }
 
     /** Watch all employees in the listEmployees */

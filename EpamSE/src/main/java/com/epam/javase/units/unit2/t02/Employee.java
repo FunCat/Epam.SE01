@@ -11,8 +11,13 @@ public class Employee {
         this.lastname = lastname;
     }
 
+    public List<Stationery> getListStationery() {
+        return listStationery;
+    }
+
     /** Add a new thing to the eymployee */
     public void addThing(Stationery thing){
+        if(thing == null) return;
         listStationery.add(thing);
     }
 
@@ -56,5 +61,5 @@ public class Employee {
 
     private String name;
     private String lastname;
-    private List<Stationery> listStationery = new ArrayList<Stationery>();
+    private List<Stationery> listStationery = new ArrayList<>();
 }
