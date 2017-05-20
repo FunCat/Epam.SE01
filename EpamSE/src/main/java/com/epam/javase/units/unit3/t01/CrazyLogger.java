@@ -18,6 +18,10 @@ public class CrazyLogger {
 
     /** Add a new log in the StringBuilder with current date and time */
     public void addNewLog(String st){
+        if(st == ""){
+            System.out.println("You can't create logs with an empty string.");
+            return;
+        }
         Calendar date = new GregorianCalendar();
         df.setTimeZone(date.getTimeZone());
         stb.append(df.format(date.getTime()) + " " +  st + "\n");
@@ -29,32 +33,32 @@ public class CrazyLogger {
     }
 
     /** Find logs by the date */
-    public void findLogsByDate(Calendar date){
+    public String findLogsByDate(Calendar date){
         df.setTimeZone(date.getTimeZone());
         String d = df.format(date.getTime());
         Pattern patt = Pattern.compile(d +".*");
         StringBuilder res = findPattern(patt);
 
-        System.out.println("Logs by date " + d + ":");
-        System.out.println(res);
+        String result = "Logs by date " + d + ":\n" + res;
+        return result;
     }
 
     /** Find logs by the particular string in logs */
-    public void findLogsByParticularString(String str){
-        Pattern patt = Pattern.compile("\\d{2}-\\d{2}-\\d{4} : \\d{2}-\\d{2} " + str);
+    public String findLogsByParticularString(String str){
+        Pattern patt = Pattern.compile("\\d{2}-\\d{2}-\\d{4} : \\d{2}-\\d{2} " + str + "\n");
         StringBuilder res = findPattern(patt);
 
-        System.out.println("Logs by string " + str + ":");
-        System.out.println(res);
+        String result = "Logs by string " + str + ":\n" + res;
+        return result;
     }
 
     /** Find logs by the relative string in logs */
-    public void findLogsByRelativeString(String str){
+    public String findLogsByRelativeString(String str){
         Pattern patt = Pattern.compile("\\d{2}-\\d{2}-\\d{4} : \\d{2}-\\d{2} .*" + str + ".*");
         StringBuilder res = findPattern(patt);
 
-        System.out.println("Logs by string " + str + ":");
-        System.out.println(res);
+        String result = "Logs by string " + str + ":\n" + res;
+        return result;
     }
 
     /** Find logs by the pattern regex */
@@ -77,9 +81,9 @@ public class CrazyLogger {
         cl.addNewLog("New log #1");
         cl.addNewLog("New log #2");
         cl.writeAllLogs();
-        cl.findLogsByDate(new GregorianCalendar(2017,4,17,8,5));
-        cl.findLogsByDate(new GregorianCalendar());
-        cl.findLogsByParticularString("New log #1");
-        cl.findLogsByRelativeString("2");
+        System.out.println(cl.findLogsByDate(new GregorianCalendar(2017,4,17,8,5)));
+        System.out.println(cl.findLogsByDate(new GregorianCalendar()));
+        System.out.println(cl.findLogsByParticularString("New log #1"));
+        System.out.println(cl.findLogsByRelativeString("2"));
     }
 }

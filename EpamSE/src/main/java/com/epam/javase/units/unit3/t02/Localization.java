@@ -54,7 +54,4 @@ public class Localization {
         }
         return true;
     }
-
-
-
 }
