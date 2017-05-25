@@ -2,10 +2,7 @@ package com.epam.javase.units.unit4.t01;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.EnumMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,8 +42,8 @@ public class WordSearch {
     public static void main(String[] args) {
         WordSearch wordSearch = new WordSearch();
         for(ListWords word: ListWords.values()) {
-            try (BufferedReader br = new BufferedReader(new FileReader(WordSearch.class.getResource("javatext.txt").getFile()))) {
-                wordSearch.findWordInFile(word, br);
+            try(DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(WordSearch.class.getResource("javatext.txt").getFile())))) {
+                wordSearch.findWordInFile(word, dis);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -58,12 +55,10 @@ public class WordSearch {
     }
 
     /** Find word in a file and counts the number of coincidences*/
-    public void findWordInFile(ListWords word, BufferedReader br){
+    public void findWordInFile(ListWords word, DataInputStream dis){
         try {
-            br.mark(0);
-            br.reset();
-            while (br.ready()){
-                String line = br.readLine();
+            while (dis.available() > 0){
+                String line = dis.readLine();
                 findWordInLine(word, line);
             }
 

@@ -30,7 +30,6 @@ public class WordSearchTest {
         count = wordSearch.getCountMap().get(WordSearch.ListWords.NEW);
         assertEquals(2, count);
         assertEquals(2, wordSearch.getCountMap().size());
-        wordSearch.findWordInLine(null, null);
     }
 
     @Test
