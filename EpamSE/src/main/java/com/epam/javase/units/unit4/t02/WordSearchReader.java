@@ -1,13 +1,14 @@
-package com.epam.javase.units.unit4.t01;
+package com.epam.javase.units.unit4.t02;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.EnumMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class WordSearch {
+public class WordSearchReader {
 
     enum ListWords {
         ABSTRACT("abstract"), CONTINUE("continue"), FOR("for"), NEW("new"), SWITCH("switch"),
@@ -40,10 +41,10 @@ public class WordSearch {
     }
 
     public static void main(String[] args) {
-        WordSearch wordSearch = new WordSearch();
+        WordSearchReader WordSearchReader = new WordSearchReader();
         for(ListWords word: ListWords.values()) {
-            try(DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(WordSearch.class.getResource("javatext.txt").getFile())))) {
-                wordSearch.findWordInFile(word, dis);
+            try(BufferedReader br = new BufferedReader(new FileReader(WordSearchReader.class.getResource("javatext.txt").getFile()))) {
+                WordSearchReader.findWordInFile(word, br);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -51,14 +52,14 @@ public class WordSearch {
             }
         }
 
-        System.out.println(wordSearch.countMap);
+        System.out.println(WordSearchReader.countMap);
     }
 
     /** Find word in a file and counts the number of coincidences*/
-    public void findWordInFile(ListWords word, DataInputStream dis){
+    public void findWordInFile(ListWords word, BufferedReader br){
         try {
-            while (dis.available() > 0){
-                String line = dis.readLine();
+            while (br.ready()){
+                String line = br.readLine();
                 findWordInLine(word, line);
             }
 
