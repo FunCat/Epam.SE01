@@ -1,82 +1,137 @@
 package com.epam.javase.units.unit5.t02;
 
-import java.io.*;
-import java.net.URL;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Properties;
 
-public class PropertiesReader {
+public class PropertiesReader{
 
-    private Path path;
-    private Properties prop = new Properties();
+    static PropertiesConstructor pc;
 
     public PropertiesReader(Path path) {
-        this.path = path;
-        load();
+        pc = new PropertiesConstructor(path);
     }
 
     public PropertiesReader(String path) {
-        this.path = getFile(path).toPath();
-        load();
+        pc = new PropertiesConstructor(path.toString());
     }
 
     public static void main(String[] args) {
         PropertiesReader pr = new PropertiesReader("config.properties");
-        System.out.println("ex1 = " + pr.getProperty("ex1"));
-        System.out.println(pr.getProperty("ex4"));
+
+        System.out.println(pr.getBoolean("varBoolean"));
+        System.out.println(pr.getByte("varByte"));
+        System.out.println(pr.getShort("varShort"));
+        System.out.println(pr.getInt("varInt"));
+        System.out.println(pr.getLong("varLong"));
+        System.out.println(pr.getFloat("varFloat"));
+        System.out.println(pr.getDouble("varDouble"));
+        System.out.println(pr.getChar("varChar"));
+        System.out.println(pr.getString("varString"));
 
     }
 
-    public void load(){
-        try(InputStream input = new FileInputStream(path.toFile())) {
-            prop.load(input);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+    public boolean getBoolean(String property){
+        String res = pc.getProperty(property);
+        if(!res.toLowerCase().equals("true") && !res.toLowerCase().equals("false"))
+            throw new ClassCastException("Property '" + property + "' can't be converted to boolean.");
+        boolean returnValue = false;
+        returnValue = Boolean.parseBoolean(res);
+        return returnValue;
     }
 
-    public static File getFile(String path){
-        File file = null;
+    public byte getByte(String property){
+        String res = pc.getProperty(property);
+        byte returnValue = 0;
         try {
-            file = findFile(path);
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            System.exit(3);
+            returnValue = Byte.parseByte(res);
         }
-        return file;
-   }
-
-    public static File findFile(String path) throws FileNotFoundException {
-        File file;
-        try {
-            file = new File(PropertiesReader.class.getResource(path).getFile());
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Property '" + property + "' can't be converted to byte.");
         }
-        catch(NullPointerException e){
-            throw new FileNotFoundException("Properties file " + path + " not found!");
-        }
-        return file;
+        return returnValue;
     }
 
-
-    public String getProperty(String property){
-        String res = "";
+    public short getShort(String property){
+        String res = pc.getProperty(property);
+        short returnValue = 0;
         try {
-            res = findProperty(property);
+            returnValue = Short.parseShort(res);
         }
-        catch (NoSuchFieldError e){
-            System.out.println(e.getMessage());
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Property '" + property + "' can't be converted to short.");
         }
-        return res;
+        return returnValue;
     }
 
-    public String findProperty(String property){
-        String res =  prop.getProperty(property);
-        if(res == null){
-            throw new NoSuchFieldError("Property " + property + " not found!");
+    public int getInt(String property){
+        String res = pc.getProperty(property);
+        int returnValue = 0;
+        try {
+            returnValue = Integer.parseInt(res);
         }
-        return res;
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Property '" + property + "' can't be converted to int.");
+        }
+        return returnValue;
+    }
+
+    public long getLong(String property){
+        String res = pc.getProperty(property);
+        long returnValue = 0;
+        try {
+            returnValue = Long.parseLong(res);
+        }
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Property '" + property + "' can't be converted to long.");
+        }
+        return returnValue;
+    }
+
+    public float getFloat(String property){
+        String res = pc.getProperty(property);
+        float returnValue = 0;
+        try {
+            returnValue = Float.parseFloat(res);
+        }
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Property '" + property + "' can't be converted to float.");
+        }
+        return returnValue;
+    }
+
+    public double getDouble(String property){
+        String res = pc.getProperty(property);
+        double returnValue = 0;
+        try {
+            returnValue = Double.parseDouble(res);
+        }
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Property '" + property + "' can't be converted to double.");
+        }
+        return returnValue;
+    }
+
+    public char getChar(String property){
+        String res = pc.getProperty(property);
+        char returnValue = ' ';
+        try {
+            returnValue = res.charAt(0);
+        }
+        catch(NumberFormatException e)
+        {
+            throw new NumberFormatException("Property '" + property + "' can't be converted to char.");
+        }
+        return returnValue;
+    }
+
+    public String getString(String property){
+        return pc.getProperty(property);
     }
 }
