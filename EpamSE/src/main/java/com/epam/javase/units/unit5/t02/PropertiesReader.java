@@ -26,10 +26,7 @@ public class PropertiesReader{
         System.out.println(pr.getDouble("varDouble"));
         System.out.println(pr.getChar("varChar"));
         System.out.println(pr.getString("varString"));
-
     }
-
-
 
     public boolean getBoolean(String property){
         String res = pc.getProperty(property);
@@ -120,14 +117,7 @@ public class PropertiesReader{
 
     public char getChar(String property){
         String res = pc.getProperty(property);
-        char returnValue = ' ';
-        try {
-            returnValue = res.charAt(0);
-        }
-        catch(NumberFormatException e)
-        {
-            throw new NumberFormatException("Property '" + property + "' can't be converted to char.");
-        }
+        char returnValue = res.charAt(0);
         return returnValue;
     }
 
